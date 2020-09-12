@@ -1126,11 +1126,10 @@ uint16_t DS3231::date2days(uint16_t year, uint8_t month, uint8_t day)
     for (uint8_t i = 1; i < month; ++i)
     {
         days16 += pgm_read_byte(daysArray + i - 1);
-    }
-
-    if ((month == 2) && isLeapYear(year))
-    {
-        ++days16;
+        if ((i == 2) && isLeapYear(year))
+        {
+            ++days16;
+        }
     }
 
     return days16 + 365 * year + (year + 3) / 4 - 1;
